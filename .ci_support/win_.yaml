@@ -1,0 +1,11 @@
+boost_cpp:
+- '1.72'
+channel_sources:
+- conda-forge,defaults
+channel_targets:
+- conda-forge main
+cxx_compiler:
+- vs2017
+pin_run_as_build:
+  boost-cpp:
+    max_pin: x.x.x
