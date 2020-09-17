@@ -9,3 +9,9 @@ cxx_compiler:
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
+soapysdr:
+- '0.7'
+target_platform:
+- win-64
+uhd:
+- 3.15.0
