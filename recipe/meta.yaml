@@ -1,5 +1,5 @@
 {% set name = "soapysdr-module-uhd" %}
-{% set version = "0.3.6" %}
+{% set version = "0.4.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/pothosware/SoapyUHD/archive/soapy-uhd-{{ version }}.tar.gz
-  sha256: 0ac7fd0967e6922f16d1ba1a7ecb72f1fbcc14dd80e5134af9a5c9b86c1bccb8
+  sha256: 9779cce2e732cd41905b6cf8ea85edbbf51b1ac918e6180bd4891eebb4c8d085
 
 build:
   number: 0
@@ -43,7 +43,7 @@ about:
   license: GPL-3.0-or-later
   license_family: GPL
   license_file: COPYING
-  summary: 'Soapy SDR plugin for UHD supported SDR devices'
+  summary: Soapy SDR plugin for UHD supported SDR devices
   description: |
     The Soapy UHD project provides a plugin module to use UHD devices within the
     SoapySDR API and software that supports SoapySDR. In addition, the project
