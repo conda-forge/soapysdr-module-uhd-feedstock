@@ -9,6 +9,7 @@ cmake_config_args=(
     -DCMAKE_BUILD_TYPE=Release
     -DCMAKE_INSTALL_PREFIX=$PREFIX
     -DLIB_SUFFIX=""
+    -DBoost_NO_BOOST_CMAKE=ON
 )
 
 cmake .. "${cmake_config_args[@]}"

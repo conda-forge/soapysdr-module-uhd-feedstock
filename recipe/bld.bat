@@ -11,6 +11,7 @@ cmake -G "Ninja" ^
     -DCMAKE_INSTALL_PREFIX:PATH="%LIBRARY_PREFIX%" ^
     -DCMAKE_PREFIX_PATH:PATH="%LIBRARY_PREFIX%" ^
     -DLIB_SUFFIX:STRING="" ^
+    -DBoost_NO_BOOST_CMAKE=ON ^
     ..
 if errorlevel 1 exit 1
 
