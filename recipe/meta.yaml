@@ -10,7 +10,7 @@ source:
   sha256: 9779cce2e732cd41905b6cf8ea85edbbf51b1ac918e6180bd4891eebb4c8d085
 
 build:
-  number: 0
+  number: 1
   run_exports:
     - {{ pin_subpackage('soapysdr-module-uhd', max_pin='x.x') }}
 
