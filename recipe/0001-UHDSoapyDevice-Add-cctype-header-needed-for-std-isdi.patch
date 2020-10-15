@@ -1,0 +1,24 @@
+From 4aab89773e3cf95b548a6bf15a465b25ddd33bd5 Mon Sep 17 00:00:00 2001
+From: Ryan Volz <ryan.volz@gmail.com>
+Date: Thu, 15 Oct 2020 10:14:58 -0400
+Subject: [PATCH] UHDSoapyDevice: Add <cctype> header needed for std::isdigit.
+
+---
+ UHDSoapyDevice.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/UHDSoapyDevice.cpp b/UHDSoapyDevice.cpp
+index 20e4a5c..3ce66f3 100644
+--- a/UHDSoapyDevice.cpp
++++ b/UHDSoapyDevice.cpp
+@@ -39,6 +39,7 @@
+ #include <boost/algorithm/string.hpp>
+ 
+ #include <algorithm>
++#include <cctype>
+ 
+ //Report a positive gain step value for UHD's automatic distribution algorithm.
+ //This prevents the gain group rounding algorithm from producing zero values.
+-- 
+2.20.1
+

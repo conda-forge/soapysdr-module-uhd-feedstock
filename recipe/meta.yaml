@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/pothosware/SoapyUHD/archive/soapy-uhd-{{ version }}.tar.gz
   sha256: 9779cce2e732cd41905b6cf8ea85edbbf51b1ac918e6180bd4891eebb4c8d085
+  patches:
+    - 0001-UHDSoapyDevice-Add-cctype-header-needed-for-std-isdi.patch
 
 build:
   number: 1
