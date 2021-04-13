@@ -1,0 +1,39 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Nicholas Corgan <n.corgan@gmail.com>
+Date: Sat, 10 Oct 2020 18:07:16 -0500
+Subject: [PATCH] SoapyUHDDevice: implemented getNativeDeviceHandle()
+
+---
+ SoapyUHDDevice.cpp | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/SoapyUHDDevice.cpp b/SoapyUHDDevice.cpp
+index 8dc77c7..afdc0c6 100644
+--- a/SoapyUHDDevice.cpp
++++ b/SoapyUHDDevice.cpp
+@@ -1,5 +1,5 @@
+ // Copyright (c) 2014-2017 Josh Blum
+-//                    2019 Nicholas Corgan
++//               2019-2020 Nicholas Corgan
+ // SPDX-License-Identifier: GPL-3.0
+ 
+ /***********************************************************************
+@@ -933,6 +933,15 @@ public:
+         return _dev->get_gpio_attr(bank, "DDR");
+     }
+ 
++    /*******************************************************************
++     * Get handle to underlying device
++     ******************************************************************/
++
++    void* getNativeDeviceHandle(void) const
++    {
++        return _dev.get();
++    }
++
+     /*******************************************************************
+      * Helpers for searching property tree
+      ******************************************************************/
+-- 
+2.30.2
+
