@@ -16,7 +16,7 @@ pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
 soapysdr:
-- '0.7'
+- '0.8'
 target_platform:
 - osx-64
 uhd:
