@@ -3,15 +3,15 @@ boost_cpp:
 cdt_name:
 - cos6
 channel_sources:
-- conda-forge,defaults
+- conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '9'
+- '10'
 docker_image:
-- quay.io/condaforge/linux-anvil-comp7
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
@@ -20,7 +20,4 @@ soapysdr:
 target_platform:
 - linux-64
 uhd:
-- 4.1.0
-zip_keys:
-- - cdt_name
-  - docker_image
+- 4.2.0
