@@ -20,4 +20,4 @@ soapysdr:
 target_platform:
 - linux-64
 uhd:
-- 4.2.0
+- 4.3.0
