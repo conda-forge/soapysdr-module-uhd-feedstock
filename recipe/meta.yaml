@@ -15,7 +15,7 @@ source:
     - 0004-Fix-get_tree-for-X300-on-UHD-4.0.patch
 
 build:
-  number: 5
+  number: 6
   run_exports:
     - {{ pin_subpackage('soapysdr-module-uhd', max_pin='x.x') }}
 
