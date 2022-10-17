@@ -20,4 +20,4 @@ soapysdr:
 target_platform:
 - linux-ppc64le
 uhd:
-- 3.15.0
+- 4.3.0
