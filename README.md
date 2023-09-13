@@ -1,11 +1,11 @@
-About soapysdr-module-uhd
-=========================
+About soapysdr-module-uhd-feedstock
+===================================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/soapysdr-module-uhd-feedstock/blob/main/LICENSE.txt)
 
 Home: https://github.com/pothosware/SoapyUHD/wiki
 
 Package license: GPL-3.0-or-later
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/soapysdr-module-uhd-feedstock/blob/main/LICENSE.txt)
 
 Summary: Soapy SDR plugin for UHD supported SDR devices
 
