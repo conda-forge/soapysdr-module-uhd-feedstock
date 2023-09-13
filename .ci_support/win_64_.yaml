@@ -14,4 +14,4 @@ soapysdr:
 target_platform:
 - win-64
 uhd:
-- 4.4.0
+- 4.5.0
