@@ -12,7 +12,7 @@ source:
     - 0001-UHDSoapyDevice-Add-cctype-header-needed-for-std-isdi.patch
 
 build:
-  number: 3
+  number: 4
   run_exports:
     - {{ pin_subpackage('soapysdr-module-uhd', max_pin='x.x') }}
 
@@ -23,11 +23,10 @@ requirements:
     - make  # [not win]
     - ninja  # [win]
   host:
-    - boost-cpp
+    - libboost-devel
     - soapysdr
     - uhd
   run:
-    - boost-cpp
 
 test:
   commands:
