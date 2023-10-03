@@ -15,7 +15,7 @@ source:
     - 0004-Fix-get_tree-for-X300-on-UHD-4.0.patch
 
 build:
-  number: 8
+  number: 9
   run_exports:
     - {{ pin_subpackage('soapysdr-module-uhd', max_pin='x.x') }}
 
@@ -26,11 +26,10 @@ requirements:
     - make  # [not win]
     - ninja  # [win]
   host:
-    - boost-cpp
+    - libboost-devel
     - soapysdr
     - uhd
   run:
-    - boost-cpp
 
 test:
   commands:
