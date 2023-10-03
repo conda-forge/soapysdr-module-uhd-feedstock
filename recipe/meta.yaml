@@ -26,7 +26,7 @@ requirements:
     - make  # [not win]
     - ninja  # [win]
   host:
-    - libboost-devel
+    - libboost-headers
     - soapysdr
     - uhd
   run:
