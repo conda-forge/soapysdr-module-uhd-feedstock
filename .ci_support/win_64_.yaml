@@ -4,8 +4,6 @@ channel_targets:
 - conda-forge main
 cxx_compiler:
 - vs2019
-libboost_devel:
-- '1.82'
 soapysdr:
 - '0.8'
 target_platform:
