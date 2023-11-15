@@ -7,7 +7,7 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '15'
+- '16'
 macos_machine:
 - arm64-apple-darwin20.0.0
 soapysdr:
@@ -15,4 +15,4 @@ soapysdr:
 target_platform:
 - osx-arm64
 uhd:
-- 4.5.0
+- 4.6.0
