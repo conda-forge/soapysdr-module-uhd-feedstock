@@ -63,7 +63,7 @@ outputs:
         - soapysdr
         - uhd
     files:
-      - lib/uhd/modules/soapySupport.so  # [not win]
+      - lib/uhd/modules/libsoapySupport.so  # [not win]
       - Library/lib/uhd/modules/soapySupport.dll  # [win]
     test:
       commands:
