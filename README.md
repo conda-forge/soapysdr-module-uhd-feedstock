@@ -92,6 +92,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-soapysdr--module--uhd-green.svg)](https://anaconda.org/conda-forge/soapysdr-module-uhd) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/soapysdr-module-uhd.svg)](https://anaconda.org/conda-forge/soapysdr-module-uhd) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/soapysdr-module-uhd.svg)](https://anaconda.org/conda-forge/soapysdr-module-uhd) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/soapysdr-module-uhd.svg)](https://anaconda.org/conda-forge/soapysdr-module-uhd) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-uhd--soapysdr-green.svg)](https://anaconda.org/conda-forge/uhd-soapysdr) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/uhd-soapysdr.svg)](https://anaconda.org/conda-forge/uhd-soapysdr) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/uhd-soapysdr.svg)](https://anaconda.org/conda-forge/uhd-soapysdr) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/uhd-soapysdr.svg)](https://anaconda.org/conda-forge/uhd-soapysdr) |
 
 Installing soapysdr-module-uhd
 ==============================
@@ -103,16 +104,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `soapysdr-module-uhd` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `soapysdr-module-uhd, uhd-soapysdr` can be installed with `conda`:
 
 ```
-conda install soapysdr-module-uhd
+conda install soapysdr-module-uhd uhd-soapysdr
 ```
 
 or with `mamba`:
 
 ```
-mamba install soapysdr-module-uhd
+mamba install soapysdr-module-uhd uhd-soapysdr
 ```
 
 It is possible to list all of the versions of `soapysdr-module-uhd` available on your platform with `conda`:
