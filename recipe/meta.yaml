@@ -2,7 +2,7 @@
 {% set version = "0.4.1" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name|lower }}-split
   version: {{ version }}
 
 source:
@@ -22,7 +22,7 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
-    - {{ stdlib("c") }}
+    - {{ stdlib('c') }}
     - cmake
     - make  # [not win]
     - ninja  # [win]
@@ -30,18 +30,45 @@ requirements:
     - libboost-headers
     - soapysdr
     - uhd
-  run:
 
-test:
-  commands:
-    # verify that libraries get installed
-    - test -f $PREFIX/lib/SoapySDR/modules{{ soapysdr }}/libuhdSupport.so  # [not win]
-    - test -f $PREFIX/lib/uhd/modules/libsoapySupport.so  # [not win]
-    - if not exist %PREFIX%\\Library\\lib\\SoapySDR\\modules{{ soapysdr }}\\uhdSupport.dll exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\lib\\uhd\\modules\\soapySupport.dll exit 1  # [win]
+outputs:
+  - name: soapysdr-module-uhd
+    requirements:
+      build:
+        - {{ compiler('cxx') }}
+        - {{ stdlib('c') }}
+      host:
+        - libboost-headers
+        - soapysdr
+        - uhd
+    files:
+      - lib/SoapySDR/modules{{ soapysdr }}/libuhdsupport.so  # [not win]
+      - Library/lib/SoapySDR/modules{{ soapysdr }}/uhdSupport.dll  # [win]
+    test:
+      commands:
+        - test -f $PREFIX/lib/SoapySDR/modules{{ soapysdr }}/libuhdSupport.so  # [not win]
+        - if not exist %PREFIX%\\Library\\lib\\SoapySDR\\modules{{ soapysdr }}\\uhdSupport.dll exit 1  # [win]
 
-    # show info to see if module is detected
-    - SoapySDRUtil --info
+        - SoapySDRUtil --info
+        - SoapySDRUtil --info | grep uhdSupport  # [not win]
+        - SoapySDRUtil --info | findstr /l uhdSupport  # [win]
+
+  - name: uhd-soapysdr
+    requirements:
+      build:
+        - {{ compiler('cxx') }}
+        - {{ stdlib('c') }}
+      host:
+        - libboost-headers
+        - soapysdr
+        - uhd
+    files:
+      - lib/uhd/modules/soapySupport.so  # [not win]
+      - Library/lib/uhd/modules/soapySupport.dll  # [win]
+    test:
+      commands:
+        - test -f $PREFIX/lib/uhd/modules/libsoapySupport.so  # [not win]
+        - if not exist %PREFIX%\\Library\\lib\\uhd\\modules\\soapySupport.dll exit 1  # [win]
 
 about:
   home: https://github.com/pothosware/SoapyUHD/wiki
@@ -58,5 +85,6 @@ about:
   dev_url: https://github.com/pothosware/SoapyUHD
 
 extra:
+  feedstock-name: soapysdr-module-uhd
   recipe-maintainers:
     - ryanvolz
