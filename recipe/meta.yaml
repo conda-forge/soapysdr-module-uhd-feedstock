@@ -42,8 +42,8 @@ outputs:
         - soapysdr
         - uhd
     files:
-      - lib/SoapySDR/modules{{ soapysdr }}/libuhdsupport.so  # [not win]
-      - Library/lib/SoapySDR/modules{{ soapysdr }}/uhdSupport.dll  # [win]
+      - lib/SoapySDR/modules*/libuhdsupport.so  # [not win]
+      - Library/lib/SoapySDR/modules*/uhdSupport.dll  # [win]
     test:
       commands:
         - test -f $PREFIX/lib/SoapySDR/modules{{ soapysdr }}/libuhdSupport.so  # [not win]
