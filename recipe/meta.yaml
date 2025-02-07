@@ -13,6 +13,9 @@ source:
     - 0002-UHDSoapyDevice-Add-cctype-header-needed-for-std-isdi.patch
     - 0003-Fix-for-getBandwidthRange-for-SOAPY_SDR_RX.patch
     - 0004-Fix-get_tree-for-X300-on-UHD-4.0.patch
+    - 0008-Added-missing-streaming-and-frequency-arg-info.patch
+    - 0009-Set-C-14-which-is-required-in-UHD-headers.patch
+    - 0010-Define-post_input_action-post_output_action-for-UHD-.patch
 
 build:
   number: 14

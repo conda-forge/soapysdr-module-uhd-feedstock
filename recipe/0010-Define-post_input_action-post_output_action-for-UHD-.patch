@@ -1,0 +1,46 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Ryan Volz <ryan.volz@gmail.com>
+Date: Fri, 7 Feb 2025 11:09:35 -0500
+Subject: [PATCH] Define post_input_action/post_output_action for UHD 4.8+
+
+---
+ UHDSoapyDevice.cpp | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+diff --git a/UHDSoapyDevice.cpp b/UHDSoapyDevice.cpp
+index 3ce66f3..f14e35d 100644
+--- a/UHDSoapyDevice.cpp
++++ b/UHDSoapyDevice.cpp
+@@ -707,6 +707,14 @@ public:
+         if (ret != 0) throw std::runtime_error(str(boost::format("UHDSoapyRxStream::issue_stream_cmd() = %d") % ret));
+     }
+ 
++    #if UHD_VERSION >= 4800000
++    void post_input_action(
++        const std::shared_ptr<uhd::rfnoc::action_info>&, const size_t) override
++    {
++        throw uhd::not_implemented_error("post_input_action is not implemented here!");
++    }
++    #endif
++
+ private:
+     SoapySDR::Device *_device;
+     SoapySDR::Stream *_stream;
+@@ -851,6 +859,14 @@ public:
+         return true;
+     }
+ 
++    #if UHD_VERSION >= 4800000
++    void post_output_action(
++        const std::shared_ptr<uhd::rfnoc::action_info>&, const size_t) override
++    {
++        throw uhd::not_implemented_error("post_output_action is not implemented here!");
++    }
++    #endif
++
+ private:
+     bool _active;
+     SoapySDR::Device *_device;
+-- 
+2.47.1
+
