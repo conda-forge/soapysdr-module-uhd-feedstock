@@ -20,5 +20,5 @@ index 20e4a5c..3ce66f3 100644
  //Report a positive gain step value for UHD's automatic distribution algorithm.
  //This prevents the gain group rounding algorithm from producing zero values.
 -- 
-2.30.2
+2.47.1
 

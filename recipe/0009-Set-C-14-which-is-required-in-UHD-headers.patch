@@ -1,0 +1,48 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Josh Blum <josh@joshknows.com>
+Date: Sun, 14 Nov 2021 11:42:55 -0600
+Subject: [PATCH] Set C++14 which is required in UHD headers
+
+---
+ CMakeLists.txt | 5 ++---
+ Changelog.txt  | 1 +
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 92aaefc..31b3d28 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -25,6 +25,8 @@ cmake_minimum_required(VERSION 2.8.7)
+ project(SoapyUHD CXX C)
+ enable_testing()
+ 
++set(CMAKE_CXX_STANDARD 14)
++
+ #select the release build type by default to get optimization flags
+ if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Release")
+@@ -164,9 +166,6 @@ install(TARGETS soapySupport
+     DESTINATION ${UHD_ROOT}/lib${LIB_SUFFIX}/uhd/modules
+ )
+ 
+-#using C++11 features for this uhd module
+-set_target_properties(soapySupport PROPERTIES CXX_STANDARD 11)
+-
+ ########################################################################
+ # rpath setup - http://www.cmake.org/Wiki/CMake_RPATH_handling
+ ########################################################################
+diff --git a/Changelog.txt b/Changelog.txt
+index 32ab85d..96962da 100644
+--- a/Changelog.txt
++++ b/Changelog.txt
+@@ -3,6 +3,7 @@ Release 0.4.1 (pending)
+ 
+ - Fix get_tree() for X300 on UHD 4.0 release
+ - Fix for getBandwidthRange() for SOAPY_SDR_RX
++- Set C++14 which is required in UHD headers
+ 
+ Release 0.4.1 (2020-09-20)
+ ==========================
+-- 
+2.47.1
+
