@@ -5,7 +5,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2019
+- vs2022
 libboost_headers:
 - '1.86'
 soapysdr:
@@ -13,4 +13,4 @@ soapysdr:
 target_platform:
 - win-64
 uhd:
-- 4.8.0
+- 4.9.0
