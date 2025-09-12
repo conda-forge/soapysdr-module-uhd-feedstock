@@ -10,6 +10,7 @@ cmake_config_args=(
     -DCMAKE_INSTALL_LIBDIR=lib
     -DCMAKE_INSTALL_PREFIX=$PREFIX
     -DBoost_NO_BOOST_CMAKE=ON
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 )
 
 cmake ${CMAKE_ARGS} .. "${cmake_config_args[@]}"
