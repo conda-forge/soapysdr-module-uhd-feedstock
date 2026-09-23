@@ -23,7 +23,7 @@ source:
     - 0013-Build-cleanly-against-UHD-4.10-70.patch
 
 build:
-  number: 18
+  number: 19
 
 outputs:
   - staging:
