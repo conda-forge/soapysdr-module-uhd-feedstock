@@ -13,6 +13,6 @@ cmake_config_args=(
     -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 )
 
-cmake ${CMAKE_ARGS} .. "${cmake_config_args[@]}"
+cmake ${CMAKE_ARGS} -G "Ninja" .. "${cmake_config_args[@]}"
 cmake --build . --config Release -- -j${CPU_COUNT}
 cmake --build . --config Release --target install

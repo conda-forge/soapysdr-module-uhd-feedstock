@@ -18,7 +18,6 @@ SoapySDR API and software that supports SoapySDR. In addition, the project
 provides a UHD module to use any SoapySDR device within the UHD API and UHD
 supported software.
 
-
 Current build status
 ====================
 
@@ -51,10 +50,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>win_64</td>
+              <td>osx_arm64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=9984&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/soapysdr-module-uhd-feedstock?branchName=main&jobName=win&configuration=win%20win_64_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/soapysdr-module-uhd-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_" alt="variant">
                 </a>
               </td>
             </tr>
@@ -83,31 +82,73 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `soapysdr-module-uhd, uhd-soapysdr` can be installed with `conda`:
+How to use
+----------
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda install soapysdr-module-uhd uhd-soapysdr
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba install soapysdr-module-uhd uhd-soapysdr
 ```
 
-It is possible to list all of the versions of `soapysdr-module-uhd` available on your platform with `conda`:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+# for adding to your local project
+pixi add soapysdr-module-uhd uhd-soapysdr
+# for installing globally
+pixi global install soapysdr-module-uhd uhd-soapysdr
+```
+
+</details>
+
+Search package versions
+-----------------------
+
+It is possible to list all of the versions of `soapysdr-module-uhd` available on your platform:
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda search soapysdr-module-uhd --channel conda-forge
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba search soapysdr-module-uhd --channel conda-forge
 ```
 
-Alternatively, `mamba repoquery` may provide more information:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+pixi search soapysdr-module-uhd --channel conda-forge
+```
+
+</details>
+
+<details>
+<summary>With mamba repoquery, which may provide more information</summary>
 
 ```
 # Search all versions available on your platform:
@@ -119,6 +160,8 @@ mamba repoquery whoneeds soapysdr-module-uhd --channel conda-forge
 # List dependencies of `soapysdr-module-uhd`:
 mamba repoquery depends soapysdr-module-uhd --channel conda-forge
 ```
+
+</details>
 
 
 About conda-forge

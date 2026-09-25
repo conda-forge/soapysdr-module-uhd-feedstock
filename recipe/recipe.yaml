@@ -1,0 +1,124 @@
+schema_version: 1
+
+context:
+  version: "0.4.1"
+
+recipe:
+  name: soapysdr-module-uhd-split
+  version: ${{ version }}
+
+source:
+  url: https://github.com/pothosware/SoapyUHD/archive/soapy-uhd-${{ version }}.tar.gz
+  sha256: 9779cce2e732cd41905b6cf8ea85edbbf51b1ac918e6180bd4891eebb4c8d085
+  patches:
+    - 0001-SoapyUHDDevice-implemented-getNativeDeviceHandle.patch
+    - 0002-UHDSoapyDevice-Add-cctype-header-needed-for-std-isdi.patch
+    - 0003-Fix-for-getBandwidthRange-for-SOAPY_SDR_RX.patch
+    - 0004-Fix-get_tree-for-X300-on-UHD-4.0.patch
+    - 0008-Added-missing-streaming-and-frequency-arg-info.patch
+    - 0009-Set-C-14-which-is-required-in-UHD-headers.patch
+    - 0010-Define-post_input_action-post_output_action-for-UHD-.patch
+    - 0011-Update-for-compat-with-newer-CMake-closes-64.patch
+    - 0012-Fix-latent-bugs-and-missing-Boost-include-69.patch
+    - 0013-Build-cleanly-against-UHD-4.10-70.patch
+
+build:
+  number: 18
+
+outputs:
+  - staging:
+      name: soapyuhd-build
+    requirements:
+      build:
+        - ${{ compiler("cxx") }}
+        - ${{ stdlib("c") }}
+        - cmake
+        - ninja
+      host:
+        - libboost-headers
+        - soapysdr
+        - uhd
+
+  - package:
+      name: soapysdr-module-uhd
+    inherit:
+      from: soapyuhd-build
+      run_exports: false
+    build:
+      files:
+        include:
+          - if: not win
+            then: lib/SoapySDR/modules*/libuhdSupport.so
+          - if: win
+            then: Library/lib/SoapySDR/modules*/uhdSupport.dll
+    requirements:
+      build:
+        - ${{ compiler("cxx") }}
+        - ${{ stdlib("c") }}
+      host:
+        - libboost-headers
+        - soapysdr
+        - uhd
+      run_exports:
+        - ${{ pin_subpackage("soapysdr-module-uhd", upper_bound="x.x") }}
+    tests:
+      - package_contents:
+          strict: true
+          files:
+            - if: not win
+              then: lib/SoapySDR/modules${{ soapysdr }}/libuhdSupport.so
+            - if: win
+              then: Library/lib/SoapySDR/modules${{ soapysdr }}/uhdSupport.dll
+      - script:
+          - SoapySDRUtil --info
+          - if: not win
+            then: SoapySDRUtil --info | grep uhdSupport
+          - if: win
+            then: SoapySDRUtil --info | findstr /l uhdSupport
+
+  - package:
+      name: uhd-soapysdr
+    inherit:
+      from: soapyuhd-build
+      run_exports: false
+    build:
+      files:
+        include:
+          - if: not win
+            then: lib/uhd/modules/libsoapySupport.so
+          - if: win
+            then: Library/lib/uhd/modules/soapySupport.dll
+    requirements:
+      build:
+        - ${{ compiler("cxx") }}
+        - ${{ stdlib("c") }}
+      host:
+        - libboost-headers
+        - soapysdr
+        - uhd
+    tests:
+      - package_contents:
+          strict: true
+          files:
+            - if: not win
+              then: lib/uhd/modules/libsoapySupport.so
+            - if: win
+              then: Library/lib/uhd/modules/soapySupport.dll
+
+about:
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Soapy SDR plugin for UHD supported SDR devices
+  description: |
+    The Soapy UHD project provides a plugin module to use UHD devices within the
+    SoapySDR API and software that supports SoapySDR. In addition, the project
+    provides a UHD module to use any SoapySDR device within the UHD API and UHD
+    supported software.
+  homepage: https://github.com/pothosware/SoapyUHD/wiki
+  repository: https://github.com/pothosware/SoapyUHD
+  documentation: https://github.com/pothosware/SoapyUHD/wiki
+
+extra:
+  feedstock-name: soapysdr-module-uhd
+  recipe-maintainers:
+    - ryanvolz

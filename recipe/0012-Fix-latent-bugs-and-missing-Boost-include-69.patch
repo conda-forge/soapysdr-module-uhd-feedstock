@@ -1,0 +1,109 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: DO2THX <80815+gretel@users.noreply.github.com>
+Date: Thu, 6 Aug 2026 20:46:19 +0200
+Subject: [PATCH] Fix latent bugs and missing Boost include (#69)
+
+* SoapyUHDDevice: include <boost/lexical_cast.hpp> explicitly
+
+Code uses boost::lexical_cast<double>() in setFrequency() but the header
+was never included directly -- it was pulled in transitively from another
+Boost header. Boost 1.85+ removed that transitive include, breaking the
+build with newer Boost versions. Add the explicit include to make the
+dependency self-evident and resilient to future Boost header refactors.
+
+Signed-off-by: Tom Hensel <code@jitter.eu>
+
+* SoapyUHDDevice: fix hasIQBalanceMode fallback delegate
+
+The fallback path called SoapySDR::Device::hasDCOffsetMode() instead of
+hasIQBalanceMode(). Dead path in practice (dir is always RX or TX), but
+still incorrect: the wrong base-class default would be returned if a
+future caller ever invoked with an unrecognized direction. Also fixes
+copy-paste confusion that masked the actual API contract.
+
+Signed-off-by: Tom Hensel <code@jitter.eu>
+
+* SoapyUHDDevice: map LATE_COMMAND error to SOAPY_SDR_TIME_ERROR
+
+uhd::rx_metadata_t::ERROR_CODE_LATE_COMMAND signals a timed stream
+command whose timestamp has passed before the device could act on it --
+a timing-domain error. Mapping this to SOAPY_SDR_STREAM_ERROR loses that
+information; SOAPY_SDR_TIME_ERROR is the matching SoapySDR error code
+and lets callers distinguish timing problems from generic stream
+failures (e.g. for retry vs abort decisions in scheduler logic).
+
+ERROR_CODE_BROKEN_CHAIN remains SOAPY_SDR_STREAM_ERROR (correct: it
+indicates a flow-graph topology break, not a timing issue).
+
+Signed-off-by: Tom Hensel <code@jitter.eu>
+
+* UHDSoapyDevice: remove unused _doErrorOnNextRecv member
+
+Declared in UHDSoapyRxStream private section but never read or written
+anywhere in the codebase. Dead state. Removing it shrinks the streamer
+struct slightly and removes confusion for future readers wondering
+what error condition was supposed to be tracked.
+
+Signed-off-by: Tom Hensel <code@jitter.eu>
+
+---------
+
+Signed-off-by: Tom Hensel <code@jitter.eu>
+---
+ SoapyUHDDevice.cpp | 5 +++--
+ UHDSoapyDevice.cpp | 2 +-
+ 2 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/SoapyUHDDevice.cpp b/SoapyUHDDevice.cpp
+index 41140a8..b7aae83 100644
+--- a/SoapyUHDDevice.cpp
++++ b/SoapyUHDDevice.cpp
+@@ -20,6 +20,7 @@
+ #include <uhd/usrp/multi_usrp.hpp>
+ #include <uhd/property_tree.hpp>
+ #include <uhd/version.hpp>
++#include <boost/lexical_cast.hpp>
+ #include <cctype>
+ #include <iostream>
+ 
+@@ -320,7 +321,7 @@ public:
+         case uhd::rx_metadata_t::ERROR_CODE_TIMEOUT: return SOAPY_SDR_TIMEOUT;
+         case uhd::rx_metadata_t::ERROR_CODE_BAD_PACKET: return SOAPY_SDR_CORRUPTION;
+         case uhd::rx_metadata_t::ERROR_CODE_ALIGNMENT: return SOAPY_SDR_CORRUPTION;
+-        case uhd::rx_metadata_t::ERROR_CODE_LATE_COMMAND: return SOAPY_SDR_STREAM_ERROR;
++        case uhd::rx_metadata_t::ERROR_CODE_LATE_COMMAND: return SOAPY_SDR_TIME_ERROR;
+         case uhd::rx_metadata_t::ERROR_CODE_BROKEN_CHAIN: return SOAPY_SDR_STREAM_ERROR;
+         }
+         return ret;
+@@ -507,7 +508,7 @@ public:
+             return __doesMBoardFEPropTreeEntryExist(dir, channel, "iq_balance/enable");
+         }
+ 
+-        return SoapySDR::Device::hasDCOffsetMode(dir, channel);
++        return SoapySDR::Device::hasIQBalanceMode(dir, channel);
+     }
+ 
+     void setIQBalanceMode(const int dir, const size_t channel, const bool automatic)
+diff --git a/UHDSoapyDevice.cpp b/UHDSoapyDevice.cpp
+index 88641c5..4aa95f4 100644
+--- a/UHDSoapyDevice.cpp
++++ b/UHDSoapyDevice.cpp
+@@ -35,6 +35,7 @@
+ #include <boost/format.hpp>
+ #include <boost/thread/mutex.hpp>
+ #include <boost/bind.hpp>
++#include <boost/lexical_cast.hpp>
+ #include <boost/weak_ptr.hpp>
+ #include <boost/algorithm/string.hpp>
+ 
+@@ -721,7 +722,6 @@ private:
+     const size_t _nchan;
+     const size_t _elemSize;
+     std::vector<void *> _offsetBuffs;
+-    bool _doErrorOnNextRecv;
+     bool _nextTimeValid;
+     uhd::time_spec_t _nextTime;
+     const double &_sampRate;
+-- 
+2.51.0
+
