@@ -12,7 +12,7 @@ cxx_compiler_version:
 - '15'
 docker_image:
 - quay.io/condaforge/linux-anvil-aarch64:alma10
-libboost_headers:
+libboost_devel:
 - '1.90'
 soapysdr:
 - '0.8'
