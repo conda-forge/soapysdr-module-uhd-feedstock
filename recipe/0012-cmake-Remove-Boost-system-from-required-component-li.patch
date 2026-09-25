@@ -1,0 +1,28 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Ryan Volz <ryan.volz@gmail.com>
+Date: Fri, 25 Sep 2026 12:18:22 -0400
+Subject: [PATCH] cmake: Remove Boost::system from required component list
+
+Boost::system is no longer available with Boost>=1.90, so this fixes
+compatibility with modern Boost.
+
+Signed-off-by: Ryan Volz <ryan.volz@gmail.com>
+---
+ CMakeLists.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2c3a1a8..3372d01 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -110,7 +110,6 @@ MESSAGE(STATUS "Configuring Boost C++ Libraries...")
+ # Although not required on my system, some users have linking issues without
+ SET(BOOST_REQUIRED_COMPONENTS
+     thread
+-    system
+ )
+ 
+ if(UNIX AND NOT BOOST_ROOT AND EXISTS "/usr/lib64")
+-- 
+2.51.0
+
