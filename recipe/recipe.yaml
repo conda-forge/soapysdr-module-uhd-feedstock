@@ -21,6 +21,7 @@ source:
     - 0011-Update-for-compat-with-newer-CMake-closes-64.patch
     - 0012-Fix-latent-bugs-and-missing-Boost-include-69.patch
     - 0013-Build-cleanly-against-UHD-4.10-70.patch
+    - 0014-UHDSoapyDevice-define-get_stream_info-for-UHD-4.11.patch
 
 build:
   number: 19
