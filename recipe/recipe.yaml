@@ -21,9 +21,10 @@ source:
     - 0011-Update-for-compat-with-newer-CMake-closes-64.patch
     - 0012-Fix-latent-bugs-and-missing-Boost-include-69.patch
     - 0013-Build-cleanly-against-UHD-4.10-70.patch
+    - 0014-UHDSoapyDevice-define-get_stream_info-for-UHD-4.11.patch
 
 build:
-  number: 18
+  number: 19
 
 outputs:
   - staging:
@@ -35,7 +36,9 @@ outputs:
         - cmake
         - ninja
       host:
-        - libboost-headers
+        # Only need libboost-headers for build, but need -devel to provide the
+        # CMake config module and therefore packages don't need a boost dep
+        - libboost-devel
         - soapysdr
         - uhd
 
@@ -56,7 +59,6 @@ outputs:
         - ${{ compiler("cxx") }}
         - ${{ stdlib("c") }}
       host:
-        - libboost-headers
         - soapysdr
         - uhd
       run_exports:
@@ -93,7 +95,6 @@ outputs:
         - ${{ compiler("cxx") }}
         - ${{ stdlib("c") }}
       host:
-        - libboost-headers
         - soapysdr
         - uhd
     tests:
