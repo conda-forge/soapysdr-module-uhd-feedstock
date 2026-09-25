@@ -18,7 +18,6 @@ SoapySDR API and software that supports SoapySDR. In addition, the project
 provides a UHD module to use any SoapySDR device within the UHD API and UHD
 supported software.
 
-
 Current build status
 ====================
 
