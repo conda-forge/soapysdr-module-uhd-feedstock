@@ -16,6 +16,7 @@ source:
     - 0008-Added-missing-streaming-and-frequency-arg-info.patch
     - 0009-Set-C-14-which-is-required-in-UHD-headers.patch
     - 0010-Define-post_input_action-post_output_action-for-UHD-.patch
+    - 0011-Build-cleanly-against-UHD-4.10-70.patch
 
 build:
   number: 18
