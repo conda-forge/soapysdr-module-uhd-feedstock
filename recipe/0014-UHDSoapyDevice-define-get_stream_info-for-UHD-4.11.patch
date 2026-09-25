@@ -9,7 +9,7 @@ Signed-off-by: Ryan Volz <ryan.volz@gmail.com>
  1 file changed, 14 insertions(+)
 
 diff --git a/UHDSoapyDevice.cpp b/UHDSoapyDevice.cpp
-index 229a330..93a9a0f 100644
+index 229a330..379d0cd 100644
 --- a/UHDSoapyDevice.cpp
 +++ b/UHDSoapyDevice.cpp
 @@ -716,6 +716,13 @@ public:
@@ -17,7 +17,7 @@ index 229a330..93a9a0f 100644
      #endif
  
 +    #if UHD_VERSION >= 4110000
-+    uhd::device_addr_t get_stream_info(const size_t chan) const override
++    uhd::device_addr_t get_stream_info(const size_t /*chan*/) const override
 +    {
 +        throw uhd::not_implemented_error("get_stream_info is not implemented here!");
 +    }
@@ -31,7 +31,7 @@ index 229a330..93a9a0f 100644
      #endif
  
 +    #if UHD_VERSION >= 4110000
-+    uhd::device_addr_t get_stream_info(const size_t chan) const override
++    uhd::device_addr_t get_stream_info(const size_t /*chan*/) const override
 +    {
 +        throw uhd::not_implemented_error("get_stream_info is not implemented here!");
 +    }
