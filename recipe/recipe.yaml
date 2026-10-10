@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "0.4.1"
+  version: "0.4.2"
 
 recipe:
   name: soapysdr-module-uhd-split
@@ -9,7 +9,7 @@ recipe:
 
 source:
   url: https://github.com/pothosware/SoapyUHD/archive/soapy-uhd-${{ version }}.tar.gz
-  sha256: 9779cce2e732cd41905b6cf8ea85edbbf51b1ac918e6180bd4891eebb4c8d085
+  sha256: 425c38e77a217d40e1643a8e3570b8614b77e16d9342798de6c3ac81998f5bc7
   patches:
     - 0001-SoapyUHDDevice-implemented-getNativeDeviceHandle.patch
     - 0002-UHDSoapyDevice-Add-cctype-header-needed-for-std-isdi.patch
@@ -24,7 +24,7 @@ source:
     - 0014-UHDSoapyDevice-define-get_stream_info-for-UHD-4.11.patch
 
 build:
-  number: 19
+  number: 0
 
 outputs:
   - staging:
@@ -52,8 +52,7 @@ outputs:
         include:
           - if: not win
             then: lib/SoapySDR/modules*/libuhdSupport.so
-          - if: win
-            then: Library/lib/SoapySDR/modules*/uhdSupport.dll
+            else: Library/lib/SoapySDR/modules*/uhdSupport.dll
     requirements:
       build:
         - ${{ compiler("cxx") }}
@@ -69,15 +68,12 @@ outputs:
           files:
             - if: not win
               then: lib/SoapySDR/modules${{ soapysdr }}/libuhdSupport.so
-            - if: win
-              then: Library/lib/SoapySDR/modules${{ soapysdr }}/uhdSupport.dll
+              else: Library/lib/SoapySDR/modules${{ soapysdr }}/uhdSupport.dll
       - script:
           - SoapySDRUtil --info
           - if: not win
             then: SoapySDRUtil --info | grep uhdSupport
-          - if: win
-            then: SoapySDRUtil --info | findstr /l uhdSupport
-
+            else: SoapySDRUtil --info | findstr /l uhdSupport
   - package:
       name: uhd-soapysdr
     inherit:
@@ -88,8 +84,7 @@ outputs:
         include:
           - if: not win
             then: lib/uhd/modules/libsoapySupport.so
-          - if: win
-            then: Library/lib/uhd/modules/soapySupport.dll
+            else: Library/lib/uhd/modules/soapySupport.dll
     requirements:
       build:
         - ${{ compiler("cxx") }}
@@ -103,9 +98,7 @@ outputs:
           files:
             - if: not win
               then: lib/uhd/modules/libsoapySupport.so
-            - if: win
-              then: Library/lib/uhd/modules/soapySupport.dll
-
+              else: Library/lib/uhd/modules/soapySupport.dll
 about:
   license: GPL-3.0-or-later
   license_file: COPYING
