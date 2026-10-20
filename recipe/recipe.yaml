@@ -10,18 +10,6 @@ recipe:
 source:
   url: https://github.com/pothosware/SoapyUHD/archive/soapy-uhd-${{ version }}.tar.gz
   sha256: 425c38e77a217d40e1643a8e3570b8614b77e16d9342798de6c3ac81998f5bc7
-  patches:
-    - 0001-SoapyUHDDevice-implemented-getNativeDeviceHandle.patch
-    - 0002-UHDSoapyDevice-Add-cctype-header-needed-for-std-isdi.patch
-    - 0003-Fix-for-getBandwidthRange-for-SOAPY_SDR_RX.patch
-    - 0004-Fix-get_tree-for-X300-on-UHD-4.0.patch
-    - 0008-Added-missing-streaming-and-frequency-arg-info.patch
-    - 0009-Set-C-14-which-is-required-in-UHD-headers.patch
-    - 0010-Define-post_input_action-post_output_action-for-UHD-.patch
-    - 0011-Update-for-compat-with-newer-CMake-closes-64.patch
-    - 0012-Fix-latent-bugs-and-missing-Boost-include-69.patch
-    - 0013-Build-cleanly-against-UHD-4.10-70.patch
-    - 0014-UHDSoapyDevice-define-get_stream_info-for-UHD-4.11.patch
 
 build:
   number: 0
